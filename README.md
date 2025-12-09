@@ -12,3 +12,6 @@
 ## Установка
 ```bash
 make install
+```
+## Демо
+[![asciinema demo](https://asciinema.org/a/m7t1BXwJSnvnuaDDVXkbnD6dI.svg)](https://asciinema.org/a/m7t1BXwJSnvnuaDDVXkbnD6dI)
