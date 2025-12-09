@@ -97,7 +97,7 @@ class ExchangeRateApiClient(BaseApiClient):
         if data.get("result") != "success":
             raise ApiRequestError(f"ExchangeRate-API error: {data.get('error-type', 'unknown')}")
 
-        rates = data.get("rates", {})
+        rates = data.get("conversion_rates") or data.get("rates") or {}
         utc_str = data.get("time_last_update_utc")
         if utc_str:
             dt = parsedate_to_datetime(utc_str).astimezone(UTC).replace(microsecond=0)
