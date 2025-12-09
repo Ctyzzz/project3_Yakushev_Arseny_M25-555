@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -12,6 +12,9 @@ from valutatrade_hub.parser_service.config import ParserConfig
 @dataclass(slots=True)
 class RatesStorage:
     cfg: ParserConfig
+    db: DatabaseManager = field(init=False, repr=False)
+    rates_path: Path = field(init=False, repr=False)
+    history_path: Path = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
         self.db = DatabaseManager()
@@ -26,11 +29,12 @@ class RatesStorage:
             if k not in cur_pairs:
                 cur_pairs[k] = v
                 continue
+
             old = cur_pairs[k]
             try:
                 if parse_dt(v["updated_at"]) > parse_dt(old["updated_at"]):
                     cur_pairs[k] = v
-            except Exception:
+            except Exception:  # noqa: BLE001
                 cur_pairs[k] = v
 
         current["pairs"] = cur_pairs

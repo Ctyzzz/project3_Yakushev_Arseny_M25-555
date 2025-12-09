@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-from valutatrade_hub.cli.interface import run_cli
+from dotenv import load_dotenv
 
 
 def main() -> None:
+    load_dotenv()
+
+    from valutatrade_hub.cli.interface import run_cli
     run_cli()
 
 

@@ -8,6 +8,7 @@ __pycache__/
 # Virtual env / Poetry
 .venv/
 poetry.lock
+.env
 
 # Builds
 dist/
