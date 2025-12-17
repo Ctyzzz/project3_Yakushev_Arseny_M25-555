@@ -196,7 +196,7 @@ def _cmd_update_rates(_: CoreUseCases, args: argparse.Namespace) -> None:
     except ApiRequestError as e:
         print(str(e))
         print("Проверьте сеть/лимиты и переменную окружения EXCHANGERATE_API_KEY.")
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"Ошибка: {e}")
 
 
@@ -215,7 +215,7 @@ def _cmd_show_rates(u: CoreUseCases, args: argparse.Namespace) -> None:
 
     try:
         validate_currency_code(base)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(str(e))
         return
 
@@ -232,7 +232,7 @@ def _cmd_show_rates(u: CoreUseCases, args: argparse.Namespace) -> None:
         shown_rate = rate
 
         if base != to:
-            # хотим frm->base, считаем через USD-мост (в кеше обычно *_USD)
+            # хотим frm -> base, считаем через USD-мост
             try:
                 frm_to_usd = float(u.get_rate(frm, "USD")["rate"]) if to != "USD" else rate
                 base_to_usd = float(u.get_rate(base, "USD")["rate"])
@@ -321,7 +321,7 @@ def run_cli() -> None:
     u = CoreUseCases()
     parser = build_parser()
 
-    # Если запустили без аргументов — REPL
+    # Если запустили без аргументов - REPL
     if len(sys.argv) == 1:
         _repl(u, parser)
         return
